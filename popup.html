@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popup Model</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+            line-height: 1.3em;
+        }
+        strong, p{
+            color: rgb(44, 44, 44);
+            font-size:1em;
+        }
+        small,strong{
+            display: block;
+        }
+        .popup-container{
+            width: 100%;
+            height: 100vh;
+            display:flex;
+            position: relative;
+            position: fixed;
+        }
+        .header{
+            width: 100%;
+            background: red;
+            padding: 12px 0px;
+            text-align: center;
+            position: absolute;
+        }
+        .list-style-none{
+            list-style: none;
+        }
+        li a{
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+        .popup-mask-layer{
+            background:rgba(180, 180, 180, 0.596);
+            width: 100%;
+            height: 100%;
+            z-index:1;
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: .3s all ease-in;
+        }
+        .popup-window{
+            width: 900px;
+            background: rgb(255, 255, 255);
+            margin: auto;
+            box-shadow: 1px 1px 10px 2px rgb(155, 155, 155);
+        }
+        .popup-widnow-header{
+            width: 100%;
+            padding: 10px 20px;
+            background: rgb(248, 2, 2);
+            position: relative;
+        }
+        .popup-window-text{
+            padding: 28px 30px 30px 20px;
+        }
+        .ul-text{
+            padding: 10px 0px 10px 30px;
+        }
+        .color-red{
+            color: red;
+            font-size: 1.10em;
+            padding: 0px 0px 10px 0px;
+        }
+        .bold{
+            font-weight: bold;
+            padding: 0px 3px;
+        }
+        .text-italic{
+            font-style: italic;
+            padding: 10px 0px 0px 0px;
+        }
+        .popup-window-text p:nth-child(3){
+            padding: 10px 0px;
+        }
+        .pfr-str{
+            padding:0px 0px 10px 0px;
+        }
+        .popup-widnow-header small:nth-child(1){
+            color: #ffffff;
+            font-size: 2em;
+        }
+        .clos-popup-box{
+            position: absolute;
+            right: 0;
+            top: 0;
+            font-size:1em;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: #000000c9;
+            border: 1px solid #ffffff;
+            text-align: center;
+            margin: -10px -10px 0px 0px;
+            color: #ffffff;
+            padding-top: 2px;
+            cursor: pointer;
+            z-index: 100;
+        }
+        .clos-popup-box:hover{
+            background: #f10000;
+        }
+        @media(max-width:992px){
+        .popup-window{
+            max-width: 700px;
+            }
+        }
+        @media(max-width:768px){
+        .popup-window{
+            width:85%;
+        }
+
+    }
+    </style>
+</head>
+<body onload="showpopupbox()">
+    <div class="popup-container">
+        <header class="header">
+            <ul class="list-style-none">
+                <li ><a href="#" onclick="showpopupwidnow()">Covid 19 Update</a></li>
+            </ul>
+        </header>
+        <div class="popup-mask-layer" id="popupsahow">
+            <div class="popup-window">
+                <div class="popup-widnow-header">
+                    <small>Covid 19 Update</small> <div class="clos-popup-box bold" onclick="closepopupbox()">X</div>
+                </div>
+                <div class="popup-window-text">
+                    <small class="color-red">OPTIX at Broadgate Opticians is OPEN!</small>
+                    <p>When visiting us, your safety and wellbeing are our main priorities, and we want everyone to feel comfortable within our practice.</p>
+                    <p>We have taken great care to conform with Government legislation, including mandatory use of PPE for our staff, regular disinfecting of all equipment and surfaces, plus UVC sanitisation of all products within the store.</p>
+                    <p class="pfr-str">We would like to remind you, personal masks must be worn when entering the shop.</p>
+                    <strong>OPTIX at Broadgate Opticians <span>is open for:</span></strong>
+                    <ul class="ul-text">
+                        <li><strong>Eye Examinations and Sight Testing</strong></li>
+                        <li><strong>Spectacle Frames and Prescription Lenses</strong></li>
+                        <li><strong>Sunglasses and Sports Eyewear</strong></li>
+                        <li><strong>Contact Lenses</strong></li>
+                        <li><strong>Eyewear Repairs</strong></li>
+                        <li><strong>Speedy Service and Home Delivery if required</strong></li>
+                        <li><strong>Remote Advice and Virtual Eyewear Consultations</strong></li>
+                    </ul>
+                    <p><span>Stay safe and <span class="bold">letOPTIX at Broadgate Opticianstake</span>care of the most precious of your senses:<span class="bold">SIGHT</span></p>
+                    <strong class="text-italic">Eyewear to see and be seen</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+       
+        var popupbox=document.getElementById("popupsahow");
+        function showpopupbox(){
+            setTimeout(function(){
+                sessionStorage.setItem('showonce','1');
+            },1000);
+            if(sessionStorage.getItem('showonce') == 1){
+                popupbox.style.zIndex='-1';
+            }
+            else{
+                setTimeout(function(){
+                    popupbox.style.opacity="1";
+                    popupbox.style.zIndex='1';
+                },900);
+            }
+        }
+        function showpopupwidnow(){
+            setTimeout(function(){
+                popupbox.style.opacity="1";
+                popupbox.style.zIndex='1';
+            },200);
+        }
+        function closepopupbox(){
+            popupbox.style.opacity="0";
+            popupbox.style.zIndex='-1';
+        }
+    </script>
+</body>
+</html>
